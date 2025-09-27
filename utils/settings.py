@@ -1,9 +1,9 @@
 from __future__ import annotations
 
+import tomllib
 from pathlib import Path
 from typing import Any
 
-import tomllib
 from dotenv import load_dotenv
 from pydantic import BaseModel, Field, field_validator
 

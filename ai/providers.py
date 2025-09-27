@@ -4,8 +4,6 @@ from dataclasses import dataclass
 from typing import Protocol
 
 from langchain_core.messages import HumanMessage
-from langchain_groq import ChatGroq
-from langchain_openai import ChatOpenAI
 
 from utils.logger import configure_logger, redact_secrets
 from utils.settings import Settings, load_settings

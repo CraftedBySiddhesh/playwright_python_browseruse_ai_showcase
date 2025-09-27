@@ -48,6 +48,19 @@ pytest -m "ai_stub" --browser chromium -n auto
 
 > **Tip:** Without API keys or with `ENABLE_AGENT=false`, the framework automatically uses the deterministic stub provider, ensuring green CI runs.
 
+## Dependency Management
+
+- The canonical dependency definitions live in [`pyproject.toml`](pyproject.toml). Update runtime pins under `[project].dependencies` and developer tooling under `[project.optional-dependencies].dev`.
+- After editing `pyproject.toml`, regenerate lock files so the ad-hoc installers stay aligned:
+
+  ```bash
+  pip install pip-tools
+  pip-compile pyproject.toml --output-file requirements.txt
+  pip-compile --extra dev pyproject.toml --output-file requirements-dev.txt
+  ```
+
+- Validate both workflows with `python -m pip install -r requirements-dev.txt` and `python -m pip install -e .[dev]` to ensure they resolve the same packages (aside from the editable entry for the local project).
+
 ## Project Structure
 
 ```
