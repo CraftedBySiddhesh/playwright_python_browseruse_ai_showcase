@@ -6,4 +6,4 @@ isort==5.13.2
 bandit==1.7.8
 detect-secrets==1.4.0
 types-requests==2.32.0.20240523
-types-jsonschema==4.22.0.20240512
+types-jsonschema==4.20.0.0
