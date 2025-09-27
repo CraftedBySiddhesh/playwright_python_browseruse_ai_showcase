@@ -3,8 +3,9 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Protocol
 
-from langchain.chat_models import ChatGroq, ChatOpenAI
-from langchain.schema import HumanMessage
+from langchain_core.messages import HumanMessage
+from langchain_groq import ChatGroq
+from langchain_openai import ChatOpenAI
 
 from utils.logger import configure_logger, redact_secrets
 from utils.settings import Settings, load_settings
@@ -40,8 +41,12 @@ class LiveProvider:
 
   def _client(self):
     if self.provider == "groq":
+      from langchain_groq import ChatGroq
+
       return ChatGroq(groq_api_key=self.api_key, model_name=self.model_name)
     if self.provider == "openai":
+      from langchain_openai import ChatOpenAI
+
       return ChatOpenAI(api_key=self.api_key, model=self.model_name)
     raise ValueError(f"Unsupported provider: {self.provider}")
 

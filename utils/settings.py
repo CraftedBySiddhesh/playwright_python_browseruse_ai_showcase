@@ -5,7 +5,7 @@ from typing import Any
 
 import tomllib
 from dotenv import load_dotenv
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator
 
 
 class TimeoutSettings(BaseModel):
@@ -26,7 +26,8 @@ class AppSettings(BaseModel):
   transcripts_dir: Path = Path("reports/ai_transcripts")
   seed: int = 42
 
-  @validator("artifacts_dir", "transcripts_dir", pre=True)
+  @field_validator("artifacts_dir", "transcripts_dir", mode="before")
+  @classmethod
   def _ensure_path(cls, value: Any) -> Path:
     return Path(value)
 
@@ -43,7 +44,8 @@ class Settings(BaseModel):
   playwright: PlaywrightSettings
   app: AppSettings
 
-  @validator("llm_provider")
+  @field_validator("llm_provider")
+  @classmethod
   def _normalize_provider(cls, value: str) -> str:
     return value.lower()
 
