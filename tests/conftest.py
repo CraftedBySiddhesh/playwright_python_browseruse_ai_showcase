@@ -7,7 +7,6 @@ import pytest
 from playwright.sync_api import Browser, BrowserContext, Page
 
 from agents.browser_agent import AgentResult, run_instructions
-from flows.saucedemo_flows import SauceDemoFlows
 from utils.settings import Settings, load_settings
 
 
@@ -78,13 +77,6 @@ def agent_runner(
     )
 
   return _runner
-
-
-@pytest.fixture
-def sauce_flow(page: Page, base_urls: dict[str, str]) -> SauceDemoFlows:
-  flow = SauceDemoFlows(page, base_urls["sauce"])
-  flow.login("standard_user", "secret_sauce")
-  return flow
 
 
 @pytest.hookimpl(hookwrapper=True)

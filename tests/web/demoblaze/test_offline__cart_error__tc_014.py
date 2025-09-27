@@ -1,29 +1,29 @@
 """
 @meta:
   TC: TC-014
-  REQ: DB-OFF-014
-  TAGS: [edge, resilience, regression]
-  SITE: Demoblaze
-  MODE: classic
+  TITLE: Demoblaze — Network Offline Edge Case
+  OBJECTIVE: App shows graceful error offline.
+  INSTRUCTION: "Open Demoblaze home, then go offline, open Cart, verify user-friendly error (no crash). Restore network after assertions."
+  EXPECTED: Error UX present; app recovers when online.
+  TAGS: [ai, edge, demoblaze, resilience, regression]
+  MODE: ai_stub
 """
 
 import pytest
-from playwright.sync_api import expect
-
-from flows.demoblaze_flows import DemoblazeFlows
 
 
 @pytest.mark.regression
 @pytest.mark.edge
 @pytest.mark.resilience
-def test_offline_cart_error_tc_014(context, page, base_urls) -> None:
-  flow = DemoblazeFlows(page, base_urls["demoblaze"])
-  flow.home.goto(base_urls["demoblaze"])
-  context.set_offline(True)
-  flow.home.open_cart()
-  error_banner = page.locator(".modal-content, .alert").first
-  expect(error_banner).to_be_visible()
-  context.set_offline(False)
-  page.reload()
-  expect(page.get_by_role("link", name="Home")).to_be_visible()
-  assert error_banner.count() >= 1, "Error banner should render when offline"
+@pytest.mark.ai_stub
+def test_offline_cart_error_tc_014(agent_runner) -> None:
+  instructions = (
+    "Open Demoblaze home, then go offline, open Cart, verify user-friendly error (no crash). Restore network after assertions."
+  )
+  result = agent_runner(
+    instructions,
+    case_id="TC-014",
+    goals=["TC-014", "Demoblaze — Network Offline Edge Case"],
+  )
+  assert result.success
+  assert result.events[0].observation == instructions

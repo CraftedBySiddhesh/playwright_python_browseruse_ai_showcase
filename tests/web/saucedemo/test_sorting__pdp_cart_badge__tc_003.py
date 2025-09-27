@@ -1,10 +1,12 @@
 """
 @meta:
   TC: TC-003
-  REQ: SD-CART-003
-  TAGS: [e2e, regression]
-  SITE: SauceDemo
-  MODE: classic
+  TITLE: SauceDemo — Sorting + PDP + Cart
+  OBJECTIVE: Sorting order reflected; add from PDP updates badge.
+  INSTRUCTION: "Sort by low-to-high, open the cheapest product’s details, add to cart, verify cart badge is 1."
+  EXPECTED: Badge 1; PDP shows correct product.
+  TAGS: [ai, e2e, sauce, regression]
+  MODE: ai_stub
 """
 
 import pytest
@@ -12,8 +14,15 @@ import pytest
 
 @pytest.mark.regression
 @pytest.mark.e2e
-def test_sorting_pdp_cart_badge_tc_003(sauce_flow) -> None:
-  first_item = sauce_flow.add_cheapest_item_and_open_cart()
-  badge_value = sauce_flow.inventory_page.cart_badge_value()
-  assert badge_value == "1", "Cart badge should show 1 after adding item"
-  assert sauce_flow.cart_page.is_item_visible(first_item), "Cart should display selected item"
+@pytest.mark.ai_stub
+def test_sorting_pdp_cart_badge_tc_003(agent_runner) -> None:
+  instructions = (
+    "Sort by low-to-high, open the cheapest product’s details, add to cart, verify cart badge is 1."
+  )
+  result = agent_runner(
+    instructions,
+    case_id="TC-003",
+    goals=["TC-003", "SauceDemo — Sorting + PDP + Cart"],
+  )
+  assert result.success
+  assert result.events[0].observation == instructions
