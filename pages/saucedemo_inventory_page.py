@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from typing import Sequence
+from collections.abc import Sequence
 
-from playwright.sync_api import Page
+from playwright.sync_api import Locator, Page
 
 from utils.sauce_simulator import Product, SauceSimulator
 

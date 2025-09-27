@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List
 
 
 @dataclass(frozen=True)
@@ -14,7 +13,7 @@ class Product:
 
 class SauceSimulator:
   def __init__(self) -> None:
-    self._inventory: List[Product] = [
+    self._inventory: list[Product] = [
       Product("Sauce Labs Backpack", 29.99),
       Product("Sauce Labs Bike Light", 9.99),
       Product("Sauce Labs Bolt T-Shirt", 15.99),
@@ -26,7 +25,7 @@ class SauceSimulator:
 
   def reset(self) -> None:
     self.cart: list[Product] = []
-    self.sorted_products: List[Product] = list(self._inventory)
+    self.sorted_products: list[Product] = list(self._inventory)
     self.logged_in = False
     self.checkout_message = ""
     self.error_message = ""
@@ -61,7 +60,7 @@ class SauceSimulator:
   def cart_badge(self) -> str:
     return str(len(self.cart))
 
-  def cart_names(self) -> List[str]:
+  def cart_names(self) -> list[str]:
     return [product.name for product in self.cart]
 
   def checkout(self) -> str:
