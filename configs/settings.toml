@@ -1,0 +1,28 @@
+[app]
+project_name = "playwright-ai-browser-use"
+artifacts_dir = "reports"
+transcripts_dir = "reports/ai_transcripts"
+seed = 42
+
+[playwright]
+slow_mo = 0
+traces = true
+screenshots = "on"
+videos = "on"
+
+[timeouts]
+page_load = 30000
+locator = 10000
+
+[allow_list]
+domains = [
+  "www.saucedemo.com",
+  "saucedemo.com",
+  "demoblaze.com",
+  "www.demoblaze.com",
+  "books.toscrape.com",
+  "the-internet.herokuapp.com",
+  "parabank.parasoft.com",
+  "reqres.in",
+  "countries.trevorblades.com"
+]
