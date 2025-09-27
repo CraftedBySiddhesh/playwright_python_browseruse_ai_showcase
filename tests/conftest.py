@@ -9,6 +9,8 @@ from playwright.sync_api import Browser, BrowserContext, Page
 from agents.browser_agent import AgentResult, run_instructions
 from utils.settings import Settings, load_settings
 
+pytest_plugins = ["utils.ct_report"]
+
 
 @pytest.fixture(scope="session")
 def settings() -> Settings:

@@ -63,8 +63,10 @@ jobs:
           fi
         shell: bash
       - name: Run tests
-        run: |
-          pytest -m "regression" --browser ${{ matrix.browser }} --html=reports/run.html --self-contained-html
+        run: >-
+          pytest -m "regression" --browser ${{ matrix.browser }} --html=reports/run.html
+          --self-contained-html --alluredir=reports/allure-results --clean-alluredir
+          --ctreport=reports/ctreport.json
       - name: Upload artifacts
         if: always()
         uses: actions/upload-artifact@v4
