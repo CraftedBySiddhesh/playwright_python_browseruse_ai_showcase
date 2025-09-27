@@ -66,7 +66,7 @@ class ProviderFactory:
       return StubProvider(seed=self.settings.app.seed)
 
     if self.settings.llm_provider == "groq" and self.settings.groq_api_key:
-      return LiveProvider(model_name="mixtral-8x7b-32768", api_key=self.settings.groq_api_key, provider="groq")
+      return LiveProvider(model_name="llama-3.3-70b-versatile", api_key=self.settings.groq_api_key, provider="groq")
     if self.settings.llm_provider == "openai" and self.settings.openai_api_key:
       return LiveProvider(model_name="gpt-4o-mini", api_key=self.settings.openai_api_key, provider="openai")
     logger.warning("Falling back to stub provider due to missing credentials")
