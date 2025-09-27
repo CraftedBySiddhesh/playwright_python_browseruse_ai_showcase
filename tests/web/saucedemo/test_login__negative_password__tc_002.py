@@ -17,13 +17,13 @@ import pytest
 @pytest.mark.negative
 @pytest.mark.ai_stub
 def test_login_negative_password_tc_002(agent_runner) -> None:
-  instructions = (
-    "Try logging into SauceDemo using username standard_user and the wrong password bad_pass."
-  )
-  result = agent_runner(
-    instructions,
-    case_id="TC-002",
-    goals=["TC-002", "SauceDemo — Negative Login Validation"],
-  )
-  assert result.success
-  assert result.events[0].observation == instructions
+    instructions = (
+        "Try logging into SauceDemo using username standard_user and the wrong password bad_pass."
+    )
+    result = agent_runner(
+        instructions,
+        case_id="TC-002",
+        goals=["TC-002", "SauceDemo — Negative Login Validation"],
+    )
+    assert result.success
+    assert result.events[0].observation == instructions

@@ -16,13 +16,11 @@ import pytest
 @pytest.mark.e2e
 @pytest.mark.ai_stub
 def test_register_login_tc_010(agent_runner) -> None:
-  instructions = (
-    "Register a new user with randomized details, log out, log back in, verify Accounts Overview is displayed."
-  )
-  result = agent_runner(
-    instructions,
-    case_id="TC-010",
-    goals=["TC-010", "Parabank — Register + Login"],
-  )
-  assert result.success
-  assert result.events[0].observation == instructions
+    instructions = "Register a new user with randomized details, log out, log back in, verify Accounts Overview is displayed."
+    result = agent_runner(
+        instructions,
+        case_id="TC-010",
+        goals=["TC-010", "Parabank — Register + Login"],
+    )
+    assert result.success
+    assert result.events[0].observation == instructions

@@ -16,13 +16,11 @@ import pytest
 @pytest.mark.e2e
 @pytest.mark.ai_stub
 def test_sorting_pdp_cart_badge_tc_003(agent_runner) -> None:
-  instructions = (
-    "Sort by low-to-high, open the cheapest product’s details, add to cart, verify cart badge is 1."
-  )
-  result = agent_runner(
-    instructions,
-    case_id="TC-003",
-    goals=["TC-003", "SauceDemo — Sorting + PDP + Cart"],
-  )
-  assert result.success
-  assert result.events[0].observation == instructions
+    instructions = "Sort by low-to-high, open the cheapest product’s details, add to cart, verify cart badge is 1."
+    result = agent_runner(
+        instructions,
+        case_id="TC-003",
+        goals=["TC-003", "SauceDemo — Sorting + PDP + Cart"],
+    )
+    assert result.success
+    assert result.events[0].observation == instructions

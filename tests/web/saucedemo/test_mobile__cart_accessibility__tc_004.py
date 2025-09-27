@@ -17,13 +17,11 @@ import pytest
 @pytest.mark.device
 @pytest.mark.ai_stub
 def test_mobile_cart_accessibility_tc_004(agent_runner) -> None:
-  instructions = (
-    "In a mobile viewport ~390×844, log in, add any item, open the cart, and verify the item name is visible without horizontal scrolling."
-  )
-  result = agent_runner(
-    instructions,
-    case_id="TC-004",
-    goals=["TC-004", "SauceDemo — Mobile Responsiveness"],
-  )
-  assert result.success
-  assert result.events[0].observation == instructions
+    instructions = "In a mobile viewport ~390×844, log in, add any item, open the cart, and verify the item name is visible without horizontal scrolling."
+    result = agent_runner(
+        instructions,
+        case_id="TC-004",
+        goals=["TC-004", "SauceDemo — Mobile Responsiveness"],
+    )
+    assert result.success
+    assert result.events[0].observation == instructions

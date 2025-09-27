@@ -16,13 +16,11 @@ import pytest
 @pytest.mark.a11y
 @pytest.mark.ai_stub
 def test_accessibility_inventory_scan_tc_013(agent_runner) -> None:
-  instructions = (
-    "Run an accessibility scan on the inventory page after login; record violations and fail on critical issues."
-  )
-  result = agent_runner(
-    instructions,
-    case_id="TC-013",
-    goals=["TC-013", "SauceDemo — Accessibility Audit"],
-  )
-  assert result.success
-  assert result.events[0].observation == instructions
+    instructions = "Run an accessibility scan on the inventory page after login; record violations and fail on critical issues."
+    result = agent_runner(
+        instructions,
+        case_id="TC-013",
+        goals=["TC-013", "SauceDemo — Accessibility Audit"],
+    )
+    assert result.success
+    assert result.events[0].observation == instructions

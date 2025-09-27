@@ -17,11 +17,11 @@ import pytest
 @pytest.mark.negative
 @pytest.mark.ai_stub
 def test_transfer_negative_amount_tc_011(agent_runner) -> None:
-  instructions = "Attempt a funds transfer with a negative amount."
-  result = agent_runner(
-    instructions,
-    case_id="TC-011",
-    goals=["TC-011", "Parabank — Transfer Funds Validation"],
-  )
-  assert result.success
-  assert result.events[0].observation == instructions
+    instructions = "Attempt a funds transfer with a negative amount."
+    result = agent_runner(
+        instructions,
+        case_id="TC-011",
+        goals=["TC-011", "Parabank — Transfer Funds Validation"],
+    )
+    assert result.success
+    assert result.events[0].observation == instructions

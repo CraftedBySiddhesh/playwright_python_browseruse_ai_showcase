@@ -16,13 +16,11 @@ import pytest
 @pytest.mark.resilience
 @pytest.mark.ai_stub
 def test_agent_recover_from_404_tc_016(agent_runner) -> None:
-  instructions = (
-    "Visit an invalid link to trigger 404, then recover to the home list and open ‘Frames’; confirm Frames page loads."
-  )
-  result = agent_runner(
-    instructions,
-    case_id="TC-016",
-    goals=["TC-016", "Agentic — Recover from 404"],
-  )
-  assert result.success
-  assert result.events[0].observation == instructions
+    instructions = "Visit an invalid link to trigger 404, then recover to the home list and open ‘Frames’; confirm Frames page loads."
+    result = agent_runner(
+        instructions,
+        case_id="TC-016",
+        goals=["TC-016", "Agentic — Recover from 404"],
+    )
+    assert result.success
+    assert result.events[0].observation == instructions

@@ -17,13 +17,13 @@ import pytest
 @pytest.mark.graphql
 @pytest.mark.ai_stub
 def test_graphql_query_by_code_tc_020(agent_runner) -> None:
-  instructions = (
-    "Query code='IN' returning name, capital, currency; all fields must be non-empty."
-  )
-  result = agent_runner(
-    instructions,
-    case_id="TC-020",
-    goals=["TC-020", "Countries GraphQL Query"],
-  )
-  assert result.success
-  assert result.events[0].observation == instructions
+    instructions = (
+        "Query code='IN' returning name, capital, currency; all fields must be non-empty."
+    )
+    result = agent_runner(
+        instructions,
+        case_id="TC-020",
+        goals=["TC-020", "Countries GraphQL Query"],
+    )
+    assert result.success
+    assert result.events[0].observation == instructions

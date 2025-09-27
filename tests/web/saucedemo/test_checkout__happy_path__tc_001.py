@@ -19,14 +19,14 @@ import pytest
 @pytest.mark.e2e
 @pytest.mark.ai_stub
 def test_checkout_happy_path_tc_001(agent_runner) -> None:
-  instructions = (
-    "Log into SauceDemo, sort items by Price (low to high), add the two cheapest products to the cart, "
-    "open the cart, proceed to checkout, enter any valid details, and complete the order."
-  )
-  result = agent_runner(
-    instructions,
-    case_id="TC-001",
-    goals=["TC-001", "SauceDemo — E2E Smoke Checkout"],
-  )
-  assert result.success
-  assert result.events[0].observation == instructions
+    instructions = (
+        "Log into SauceDemo, sort items by Price (low to high), add the two cheapest products to the cart, "
+        "open the cart, proceed to checkout, enter any valid details, and complete the order."
+    )
+    result = agent_runner(
+        instructions,
+        case_id="TC-001",
+        goals=["TC-001", "SauceDemo — E2E Smoke Checkout"],
+    )
+    assert result.success
+    assert result.events[0].observation == instructions
