@@ -1,0 +1,13 @@
+steps:
+  - action: navigate
+    target: inventory
+    description: "Open inventory page after login"
+  - action: sort
+    target: "Price (low to high)"
+  - action: add_to_cart
+    target: first_two_items
+  - action: checkout
+    fields:
+      first_name: Test
+      last_name: User
+      postal_code: 12345

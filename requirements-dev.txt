@@ -1,0 +1,9 @@
+-r requirements.txt
+mypy==1.10.0
+ruff==0.4.7
+black==24.4.2
+isort==5.13.2
+bandit==1.7.8
+detect-secrets==1.4.0
+types-requests==2.32.0.20240523
+types-jsonschema==4.22.0.20240512
