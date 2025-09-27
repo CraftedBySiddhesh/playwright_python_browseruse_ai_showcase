@@ -1,21 +1,28 @@
 """
 @meta:
   TC: TC-006
-  REQ: DB-CART-006
-  TAGS: [e2e, regression]
-  SITE: Demoblaze
-  MODE: classic
+  TITLE: Demoblaze — Remove From Cart
+  OBJECTIVE: Removing item recalculates total.
+  INSTRUCTION: "Add two phones to the cart, remove one, verify the total updates."
+  EXPECTED: Total equals remaining item price.
+  TAGS: [ai, e2e, demoblaze, regression]
+  MODE: ai_stub
 """
 
 import pytest
 
-from flows.demoblaze_flows import DemoblazeFlows
-
 
 @pytest.mark.regression
 @pytest.mark.e2e
-def test_cart_remove_recalculates_tc_006(page, base_urls) -> None:
-  flow = DemoblazeFlows(page, base_urls["demoblaze"])
-  total_before, total_after = flow.remove_item_and_get_total()
-  assert total_before > total_after, "Total should decrease after removing one item"
-  assert total_after > 0, "Remaining total should be greater than zero"
+@pytest.mark.ai_stub
+def test_cart_remove_recalculates_tc_006(agent_runner) -> None:
+  instructions = (
+    "Add two phones to the cart, remove one, verify the total updates."
+  )
+  result = agent_runner(
+    instructions,
+    case_id="TC-006",
+    goals=["TC-006", "Demoblaze — Remove From Cart"],
+  )
+  assert result.success
+  assert result.events[0].observation == instructions

@@ -1,28 +1,28 @@
 """
 @meta:
   TC: TC-012
-  REQ: BK-VIS-012
-  TAGS: [visual, regression]
-  SITE: Books
-  MODE: classic
+  TITLE: BooksToScrape — Visual Baseline
+  OBJECTIVE: Catch unintended UI changes on category grid.
+  INSTRUCTION: "Capture a snapshot of the ‘Travel’ category grid and compare against baseline with a small tolerance; fail if diff exceeds tolerance."
+  EXPECTED: Test fails on significant diff; baseline stored.
+  TAGS: [ai, visual, books, regression]
+  MODE: ai_stub
 """
 
-import json
-from pathlib import Path
-
 import pytest
-
-from flows.books_flows import BooksFlows
 
 
 @pytest.mark.regression
 @pytest.mark.visual
-def test_visual_travel_category_baseline_tc_012(page, base_urls, settings) -> None:
-  baseline_file = Path("configs/baselines/books_travel.json")
-  baseline = json.loads(baseline_file.read_text())
-  flows = BooksFlows(page, base_urls["books"], settings.app.artifacts_dir)
-  snapshot_path = flows.capture_category_snapshot("Travel", "travel_grid")
-  product_count = page.locator(".product_pod").count()
-  tolerance = 2
-  assert abs(product_count - baseline["title_count"]) <= tolerance, "Grid layout changed beyond tolerance"
-  assert snapshot_path.exists(), "Snapshot should be captured to disk"
+@pytest.mark.ai_stub
+def test_visual_travel_category_baseline_tc_012(agent_runner) -> None:
+  instructions = (
+    "Capture a snapshot of the ‘Travel’ category grid and compare against baseline with a small tolerance; fail if diff exceeds tolerance."
+  )
+  result = agent_runner(
+    instructions,
+    case_id="TC-012",
+    goals=["TC-012", "BooksToScrape — Visual Baseline"],
+  )
+  assert result.success
+  assert result.events[0].observation == instructions

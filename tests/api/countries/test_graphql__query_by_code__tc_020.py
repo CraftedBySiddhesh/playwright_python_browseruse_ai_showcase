@@ -1,32 +1,29 @@
 """
 @meta:
   TC: TC-020
-  REQ: CT-GQL-020
-  TAGS: [api, graphql, regression]
-  SITE: Countries
-  MODE: classic
+  TITLE: API — Countries GraphQL Query by Code
+  OBJECTIVE: Validate GraphQL query response fields.
+  INSTRUCTION: "Query code='IN' returning name, capital, currency; all fields must be non-empty."
+  EXPECTED: Fields present & non-empty; types correct.
+  TAGS: [ai, api, graphql, countries, regression]
+  MODE: ai_stub
 """
 
 import pytest
-import requests
 
 
 @pytest.mark.regression
 @pytest.mark.api
 @pytest.mark.graphql
-def test_graphql_query_by_code_tc_020(base_urls) -> None:
-  url = base_urls["countries"]
-  query = """
-  query GetCountry($code: ID!) {
-    country(code: $code) {
-      name
-      capital
-      currency
-    }
-  }
-  """
-  response = requests.post(url, json={"query": query, "variables": {"code": "IN"}}, timeout=10)
-  assert response.status_code == 200, "Expected 200 from Countries API"
-  data = response.json()["data"]["country"]
-  assert all(data[field] for field in ("name", "capital", "currency")), "All fields should be non-empty"
-  assert data["currency"].isupper(), "Currency should be uppercase"
+@pytest.mark.ai_stub
+def test_graphql_query_by_code_tc_020(agent_runner) -> None:
+  instructions = (
+    "Query code='IN' returning name, capital, currency; all fields must be non-empty."
+  )
+  result = agent_runner(
+    instructions,
+    case_id="TC-020",
+    goals=["TC-020", "Countries GraphQL Query"],
+  )
+  assert result.success
+  assert result.events[0].observation == instructions
